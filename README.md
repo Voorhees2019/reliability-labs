@@ -16,7 +16,7 @@ git clone https://github.com/Voorhees2019/reliability-labs.git
 ```
 cd reliability-labs && cd Lab1
 ```
-3. Modify the "data.txt" file if you need
+3. Modify the "data.txt" file if you need:
 `nano data.txt` or `vi data.txt` or using graphical interface
 4. Run the "main.py" file
 ```
