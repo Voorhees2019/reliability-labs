@@ -21,28 +21,39 @@ def main():
     k = 10
     N = len(input_lst)
     f_lst = []
+    p_lst = []
     boundaries = []
 
     input_lst.sort()
     Tcp = sum(input_lst) / N
     h = (input_lst[-1] - input_lst[0]) / 10
+    print(f'{h=}')
     z = 0
     for i in range(1, k + 1):
         c = 0
+        print(f'Interval {i}: [{h * (i-1) + input_lst[0]} to {h * i + input_lst[0]}]')
         while z < len(input_lst) and input_lst[z] <= h * i + input_lst[0]:
             z += 1
             c += 1
         f_lst.append(c / N / h)
+        p_lst.append(1 - z / N)
 
-    p_lst = [f_i * h for f_i in f_lst]  # [round(fi*h, 2)for fi in f_lst]
     p_lst.insert(0, 1)
-
+    print(f'{f_lst=}')
+    print(f'{p_lst=}')
     for i in range(len(p_lst) - 1):
-        if p_lst[i + 1] < gamma < p_lst[i]:
+        if p_lst[i + 1] <= gamma < p_lst[i]:
             boundaries.append((p_lst[i], i))
             boundaries.append((p_lst[i + 1], i + 1))
-    d = (boundaries[0][0] - gamma) / (boundaries[0][0] - boundaries[1][0])
-    Tgamma = boundaries[0][1] + h * d
+    try:
+        print(f'gamma(={gamma}) boundaries: [{boundaries[0][0]} to {boundaries[1][0]}]. This is the interval #{boundaries[1][1]}.')
+        d = (boundaries[0][0] - gamma) / (boundaries[0][0] - boundaries[1][0])
+        print(f'{d=}')
+
+        Tgamma = boundaries[0][1] + h * d
+    except:
+        print('Something went wrong. Check your input data')
+        exit(1)
 
     def get_P(t):
         tmp, f_i = 0, 0
@@ -63,7 +74,6 @@ def main():
     except ZeroDivisionError:
         print('Something went wrong. Check your input data')
         exit(1)
-
     print(f'Середній наробіток до відмови Tср: {Tcp}')
     print(f'γ-відсотковий наробіток на відмову при γ = {gamma}. Tγ = {Tgamma=}')
     print(f'Ймовірність безвідмовної роботи на час {t1} годин = {P}')
