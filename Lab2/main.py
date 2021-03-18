@@ -2,7 +2,7 @@ from functools import reduce
 from copy import deepcopy
 
 
-def main():
+def get_uptime_probability():
     def get_all_routes(vertex, previous_vertex):
         try:
             if previous_vertex != n:
@@ -113,8 +113,9 @@ def main():
         tmp_lst = list(map(lambda x, y: y if x == 1 else 1-y, working_route, p_list))
         P += reduce(lambda x, y: x*y, tmp_lst)
 
-    print(f"[SUCCESS] System uptime probability = {P}")
+    return P
 
 
 if __name__ == '__main__':
-    main()
+    P = get_uptime_probability()
+    print(f"[SUCCESS] System uptime probability = {P}")
