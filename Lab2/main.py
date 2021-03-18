@@ -2,7 +2,9 @@ from functools import reduce
 from copy import deepcopy
 
 
-def get_uptime_probability():
+def get_uptime_probability(p_lst=None, matrix=None):
+    global p_list
+
     def get_all_routes(vertex, previous_vertex):
         try:
             if previous_vertex != n:
@@ -38,15 +40,28 @@ def get_uptime_probability():
     except:
         print('[ERROR] Incorrect input data. Check \'data.txt\' file.')
         exit(1)
+    else:
+        if p_lst:
+            p_list = p_lst
+        if matrix:
+            matrix_connections = matrix
 
-    transposed_matrix = [[matrix_connections[j][i] for j in range(len(matrix_connections))] for i in range(len(matrix_connections[0]))]
+    try:
+        transposed_matrix = [[matrix_connections[j][i] for j in range(len(matrix_connections))] for i in range(len(matrix_connections[0]))]
+    except:
+        print('[ERROR] Incorrect input matrix.')
+        exit(1)
     start_vertexes = []
     end_vertexes = []
     routes = []
     route = []
     working_routes = []
     P = 0
-    n = len(p_list)
+    try:
+        n = len(p_list)
+    except:
+        print('[ERROR] Incorrect input p_list.')
+        exit(1)
 
     # checking input data
 
@@ -55,7 +70,10 @@ def get_uptime_probability():
         exit(1)
 
     for i in p_list:
-        if i > 1 or i <= 0:
+        try:
+            if i > 1 or i <= 0:
+                raise
+        except:
             print("[ERROR] Incorrect possibilities list. Possibility must be in range (0, 1]")
             exit(1)
 
