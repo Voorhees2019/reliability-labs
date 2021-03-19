@@ -8,7 +8,7 @@ def main():
     p_system = lab2.get_uptime_probability()
     q_system = 1 - p_system
     t_system = round(-t / log(p_system))
-    print(f'Загальне ненавантажене резервування з кратністю {k1}')
+    print(f'Загальне навантажене резервування з кратністю {k1}')
     print(f'P_system({t}): {p_system}')
     print(f'Q_system({t}): {q_system}')
     print(f'T_system: {t_system}')
@@ -26,7 +26,7 @@ def main():
     print(f'T_q({t}): {g_t}')
     print()
 
-    print(f'Роздільне навантажене резервування з кратністю {k2}')
+    print(f'Роздільне вантажене резервування з кратністю {k2}')
     p_list = lab2.p_list
     p_reversed_list = [1 - (1 - p_list[i]) ** (k2 + 1) for i in range(len(p_list))]
     q_reversed_list = [1 - i for i in p_reversed_list]
