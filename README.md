@@ -19,6 +19,10 @@ or into Lab2 directory
 ```
 cd reliability-labs && cd Lab2
 ```
+or into Lab3 directory
+```
+cd reliability-labs && cd Lab3
+```
 3. Modify the "data.txt" file if you need:
 `nano data.txt` or `vi data.txt` or using graphical interface
 4. Run the "main.py" file
